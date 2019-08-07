@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends '_base.html' %}
+{% block headBlock %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <br>
+        <h1 class="title">{{ title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+
+            {% if student.errors or mockTest.errors %}
+                <article class="message is-danger">
+                  <div class="message-header">
+                    <p>Error</p>
+                  </div>
+                  <div class="message-body">
+                    {{ student.errors }}
+                    {{ mockTest.errors }}
+                  </div>
+                </article>
+            {% endif %}
+
+            <div class="field">
+                <div class="controller">
+                    {{ student.name }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="controller">
+                    <label>Date of Birth(optional): &nbsp;</label>
+                    {{ student.dob }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="controller">
+                    {{ student.email }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="controller">
+                    {{ student.db_folder }}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="controller">
+                    {{ mockTest.problem1 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="controller">
+                    {{ mockTest.problem2 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="controller">
+                    {{ mockTest.problem3 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="controller">
+                    {{ mockTest.problem4 }}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="controller">
+                    <label>Dropped Out </label>
+                    {{ student.dropped_out }}
+                </div>
+            </div>
+            <button type="submit" class="button is-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

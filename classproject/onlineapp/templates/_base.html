@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    {% block headBlock %}
+    {% endblock %}
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-head">
+            <nav class="navbar">
+              <div class="container">
+                <div class="navbar-brand">
+                  <a class="navbar-item" href="/colleges">Home</a>
+                </div>
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                  <div class="navbar-end">
+                    {% if user.is_authenticated %}
+                      <a class="navbar-item" href="{% url 'onlineapp:logout' %}">Log out</a>
+                    {% else %}
+                      <a class="navbar-item" href="{% url 'onlineapp:login' %}">Login</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </nav>
+        </div>
+        <center>
+          <div class="hero-body">
+            <div class="container">
+
+                  <h1 class="title">
+                    Class Project
+                  </h1>
+                  <h2 class="subtitle">
+                    Student Management System
+                  </h2>
+            </div>
+          </div>
+        </center>
+    </section>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends '_base.html' %}
+{% load static %}
+{% block headBlock %}
+    <meta charset="UTF-8">
+    {% if clgName %}
+        <title>Students of {{ clgName }}</title>
+    {% else %}
+        <title>Error</title>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        {% if clgName %}
+            <br>
+            <center>
+                <h1 class="title">Students of {{ clgName }}</h1>
+            </center>
+            {% if 'onlineapp.add_student' in permissions %}
+                <a class="button is-success is-outlined" href="{% url 'onlineapp:addStudent' clgId %}">+ Add Student</a><br><br>
+            {% endif %}
+            <table class="table is-fullwidth">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total</th>
+                    {% if 'onlineapp.change_student' in permissions %}
+                        <th scope="col">Actiosn</th>
+                    {% endif %}
+                </tr>
+                {% for student in details %}
+                    <tr>
+                        <td class="row">{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.mocktest1.total }}</td>
+                        {% if 'onlineapp.change_student' in permissions %}
+                            <td><a href="{% url 'onlineapp:editStudent' clgId student.id %}">Edit</a>&nbsp;|&nbsp;<a href="{% url 'onlineapp:deleteStudent' clgId student.id %}">Delete</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

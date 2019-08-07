@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends '_base.html' %}
+{% block headBlock %}
+    <style>
+        .centerAlign{
+            text-align:center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns is-centered" style="margin:auto;">
+            <div class="column is-half">
+                <h1 class="title centerAlign">Login</h1>
+                <form method="POST">
+                    {% csrf_token %}
+
+
+                    {% if loginForm.errors or authError %}
+                        <article class="message is-danger">
+                          <div class="message-header">
+                            <p>Error</p>
+                          </div>
+                          <div class="message-body">
+                            {{ loginForm.errors }}
+                            {{ authError }}
+                          </div>
+                        </article>
+                    {% endif %}
+
+
+                    <div class="field">
+                        <div class="controller">
+                            {{ loginForm.username }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="controller">
+                            {{ loginForm.password }}
+                        </div>
+                    </div>
+                    <div class="centerAlign">
+                        <button type="submit" class="button is-primary">Login</button><br><br>
+                        <a href="{% url 'onlineapp:signup' %}" class="button">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

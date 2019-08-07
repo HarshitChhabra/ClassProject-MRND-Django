@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends '_base.html' %}
+{% block headBlock %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <center>
+            <br>
+            <h1 class="title">{{ title }}</h1>
+            <form method="POST">
+                {% csrf_token %}
+
+                 {% if form.errors %}
+                    <article class="message is-danger">
+                      <div class="message-header">
+                        <p>Error</p>
+                      </div>
+                      <div class="message-body">
+                        {{ form.errors }}
+                      </div>
+                    </article>
+                {% endif %}
+
+                <div class="field">
+                    <div class="control">
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        {{ form.location }}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        {{ form.acronym }}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        {{ form.contact }}
+                    </div>
+                </div>
+                <button class="button is-info is-outlined" type="submit">Submit</button>
+            </form>
+        </center>
+    </div>
+{% endblock %}

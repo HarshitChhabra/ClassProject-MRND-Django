@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends '_base.html' %}
+
+{% block headBlock %}
+    <title>Colleges</title>
+    <style>
+        .itemHover:hover{
+            color: #212529;
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+        .itemHover{
+            cursor:pointer;
+        }
+        a{
+            text-decoration:none;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <br>
+        <center>
+            <h1 class="title" style="text-aligned:center;">Colleges</h1>
+        </center>
+        {% if 'onlineapp.add_college' in permissions %}
+            <a class="button is-success is-outlined" href="/college/add">+ Add College</a><br><br>
+        {% endif %}
+        {% if clgs %}
+            <table class="table is-fullwidth" style="margin-bottom:20px;">
+                <tr>
+                    <th scope="col">Acronym</th>
+                    <th scope="col">College</th>
+                    {% if 'onlineapp.change_college' in permissions %}
+                        <th scope="col">Actions</th>
+                    {% endif %}
+                </tr>
+            {% for clg in clgs %}
+                <tr>
+                    <td scope="row">{{ clg.acronym }}</td>
+                    <td class="itemHover" onclick="window.location='/colleges/{{ clg.id }}'">{{ clg.name }}</td>
+                    {% if 'onlineapp.change_college' in permissions %}
+                        <td><a href="/college/{{ clg.id }}/edit">Edit</a>&nbsp;|&nbsp;<a href="{% url 'onlineapp:deleteCollege' clg.id %}">Delete</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
